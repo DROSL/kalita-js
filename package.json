@@ -1,28 +1,30 @@
 {
-  "name": "kalita-js",
-  "version": "1.0.0",
-  "description": "A JavaScript client with a graphical user interface for Kalita, a text-to-speech software with a focus on data minimization and user privacy.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/azmke/kalita-js.git"
-  },
-  "keywords": [
-    "privacy",
-    "frontend",
-    "data-minimization",
-    "text-to-speech"
-  ],
-  "author": "Alexander Ziemke, Dominik Blut",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/azmke/kalita-js/issues"
-  },
-  "homepage": "https://github.com/azmke/kalita-js#readme",
-  "devDependencies": {
-    "prettier": "2.2.1"
-  }
+	"name": "kalita-js",
+	"version": "1.0.0",
+	"description": "A JavaScript client with a graphical user interface for Kalita, a text-to-speech software with a focus on data minimization and user privacy.",
+	"private": true,
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/azmke/kalita-js.git"
+	},
+	"keywords": [
+		"privacy",
+		"frontend",
+		"data-minimization",
+		"text-to-speech"
+	],
+	"author": "Alexander Ziemke, Dominik Blut",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/azmke/kalita-js/issues"
+	},
+	"homepage": "https://github.com/azmke/kalita-js#readme",
+	"devDependencies": {
+		"prettier": "2.2.1",
+		"webpack": "^5.31.2",
+		"webpack-cli": "^4.6.0"
+	}
 }
