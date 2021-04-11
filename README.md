@@ -5,7 +5,7 @@
 To build with webpack run
 
 ```bash
-npn run build
+npm run build
 ```
 
 ## Prettify
