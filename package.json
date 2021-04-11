@@ -4,7 +4,8 @@
 	"description": "A JavaScript client with a graphical user interface for Kalita, a text-to-speech software with a focus on data minimization and user privacy.",
 	"private": true,
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack"
 	},
 	"repository": {
 		"type": "git",
@@ -16,13 +17,25 @@
 		"data-minimization",
 		"text-to-speech"
 	],
-	"author": "Alexander Ziemke, Dominik Blut",
+	"contributors": [
+		{
+			"name": "Alexander Ziemke",
+			"email": "alexander.ziemke@ovgu.de"
+		},
+		{
+			"name": "Dominik Blut",
+			"email": "dominik.blut@ovgu.de"
+		}
+	],
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/azmke/kalita-js/issues"
 	},
 	"homepage": "https://github.com/azmke/kalita-js#readme",
 	"devDependencies": {
+		"@babel/core": "^7.13.15",
+		"@babel/preset-env": "^7.13.15",
+		"babel-loader": "^8.2.2",
 		"prettier": "2.2.1",
 		"webpack": "^5.31.2",
 		"webpack-cli": "^4.6.0"
