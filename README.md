@@ -2,7 +2,7 @@
 
 ## Build
 
-To build with webpack run
+To build with rollup run
 
 ```bash
 npm run build

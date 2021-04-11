@@ -1,0 +1,4 @@
+Authors ordered by first contribution.
+
+Alexander Ziemke <alexander.ziemke@ovgu.de>
+Dominik Blut <dominik.blut@ovgu.de>
