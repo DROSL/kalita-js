@@ -11,45 +11,44 @@ import settingsIcon from "./svg/settings.svg";
 
 let replayButton = document.createElement("button");
 replayButton.className = "kalita-control kalita-replay";
+replayIcon.className = "kalita-icon";
 replayButton.appendChild(replayIcon);
 player.appendChild(replayButton);
 
 let playButton = document.createElement("button");
 playButton.className = "kalita-control kalita-play";
+playIcon.className = "kalita-icon";
 playButton.appendChild(playIcon);
 player.appendChild(playButton);
 
 let forwardButton = document.createElement("button");
 forwardButton.className = "kalita-control kalita-forward";
+forwardIcon.className = "kalita-icon";
 forwardButton.appendChild(forwardIcon);
 player.appendChild(forwardButton);
-
-let currentTime = document.createElement("span");
-currentTime.className = "kalita-control kalita-current-time";
-currentTime.setAttribute("role", "timer");
-let currentTimeText = document.createTextNode("00:00");
-currentTime.appendChild(currentTimeText);
-player.appendChild(currentTime);
 
 let slider = document.createElement("button");
 slider.className = "kalita-slider";
 slider.setAttribute("role", "slider");
 player.appendChild(slider);
 
-let remainingTime = document.createElement("span");
-remainingTime.className = "kalita-control kalita-remaining-time";
-remainingTime.setAttribute("role", "timer");
-let remainingTimeText = document.createTextNode("-00:00");
-remainingTime.appendChild(remainingTimeText);
-player.appendChild(remainingTime);
+let mediaRange = document.createElement("span");
+mediaRange.className = "kalita-range";
+slider.appendChild(mediaRange);
+
+let mediaMeter = document.createElement("span");
+mediaMeter.className = "kalita-meter";
+mediaRange.appendChild(mediaMeter);
 
 let downloadButton = document.createElement("button");
 downloadButton.className = "kalita-control kalita-download";
+downloadIcon.className = "kalita-icon";
 downloadButton.appendChild(downloadIcon);
 player.appendChild(downloadButton);
 
 let settingsButton = document.createElement("button");
 settingsButton.className = "kalita-control kalita-settings";
+settingsIcon.className = "kalita-icon";
 settingsButton.appendChild(settingsIcon);
 player.appendChild(settingsButton);
 
