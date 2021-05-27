@@ -1,4 +1,5 @@
 import json from "@rollup/plugin-json";
+import image from "@rollup/plugin-image";
 import babel from "@rollup/plugin-babel";
 import { terser } from "rollup-plugin-terser";
 
@@ -18,6 +19,9 @@ export default {
 	],
 	plugins: [
 		json(),
+		image({
+			dom: true,
+		}),
 		babel({
 			babelHelpers: "bundled",
 		}),

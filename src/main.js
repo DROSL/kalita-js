@@ -1,5 +1,4 @@
-//import "./style.css";
+import player from "./player";
 
 const target = document.getElementById("kalita-player");
-
-alert(target);
+target.replaceWith(player);
