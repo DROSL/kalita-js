@@ -21,28 +21,63 @@
 		<h1>Kalita Demo</h1>
 
 		<p>
-			Eine wunderbare Heiterkeit hat meine ganze Seele eingenommen, gleich
-			den süßen Frühlingsmorgen, die ich mit ganzem Herzen genieße. Ich
-			bin allein und freue mich meines Lebens in dieser Gegend, die für
-			solche Seelen geschaffen ist wie die meine. Ich bin so glücklich,
-			mein Bester, so ganz in dem Gefühle von ruhigem Dasein versunken,
-			daß meine Kunst darunter leidet. Ich könnte jetzt nicht zeichnen,
-			nicht einen Strich, und bin nie ein größerer Maler gewesen als in
-			diesen Augenblicken.
+			<strong>Kalita</strong> ist ein
+			<a href="https://de.wikipedia.org/wiki/Sprachsynthese"
+				>Text-to-Speech-System</a
+			>, das die Datensparsamkeit und die Privatsphäre seiner Nutzer in
+			den Vordergrund stellt. Während des Betriebs wird keine Verbindung
+			zu etwaigen Drittanbietern aufgebaut. Die Open-Source-Software und
+			kann von jedermann auf dem eigenen Server installiert werden.
 		</p>
 		<p>
-			Wenn das liebe Tal um mich dampft, und die hohe Sonne an der
-			Oberfläche der undurchdringlichen Finsternis meines Waldes ruht, und
-			nur einzelne Strahlen sich in das innere Heiligtum stehlen, ich dann
-			im hohen Grase am fallenden Bache liege, und näher an der Erde
-			tausend mannigfaltige Gräschen mir merkwürdig werden; wenn ich das
-			Wimmeln der kleinen Welt zwischen Halmen, die unzähligen,
-			unergründlichen Gestalten der Würmchen, der Mückchen näher an meinem
-			Herzen fühle, und fühle die Gegenwart des Allmächtigen, der uns nach
-			seinem Bilde schuf, das Wehen des Alliebenden, der uns in ewiger
-			Wonne schwebend trägt und erhält; mein Freund! Wenn's dann um meine
-			Augen dämmert, und die Welt um mich her und der Himmel ganz in
-			meiner Seele ruhn.
+			Das Projekt entstand ursprünglich im Rahmen der Veranstaltungen
+			<a
+				href="https://omen.cs.uni-magdeburg.de/itiamsl/deutsch/lehre/ws-20-21/mmdap.html"
+				>"IT-Sicherheit und Digitale Selbstverteidigung"</a
+			>
+			und
+			<a
+				href="https://omen.cs.uni-magdeburg.de/itiamsl/deutsch/lehre/ws-20-21/smkits.html"
+				>"Schlüssel- und Methodenkompetenzen in der IT-Sicherheit"</a
+			>, gehalten von
+			<a href="https://wwwiti.cs.uni-magdeburg.de/~jdittman/"
+				>Frau Prof. Dr.-Ing. Jana Dittmann</a
+			>
+			im Wintersemester 2020/21 an der Otto-von-Guericke-Universität
+			Magdeburg. Mittlerweile wird Kalita im Rahmen der Veranstaltung
+			<a
+				href="https://omen.cs.uni-magdeburg.de/itiamsl/deutsch/lehre/ss-21/ifor.html"
+				>"IT-Forensik"</a
+			>
+			weiterentwickelt und hinsichtlich der Möglichkeiten zur forensischen
+			Aufklärung untersucht. Das Ziel ist die Integration des Systems in
+			den Internetauftritt der Arbeitsgruppe Multimedia and Security (<a
+				href="https://omen.cs.uni-magdeburg.de/itiamsl/deutsch/home/index.html"
+				>AMSL</a
+			>). Es wird dort das zur Zeit im Einsatz befindliche TTS-System von
+			ReadSpeaker ersetzen.
+		</p>
+
+		<h2>Aufbau</h2>
+
+		<p>Kalita unterteilt sich in zwei Komponenten:</p>
+		<ul>
+			<li>
+				Frontend für Textauswahl, Text Highlighting und Audiowiedergabe
+			</li>
+			<li>
+				Backend für Spracherkennung, Sprachsynthese und Audio Buffering
+			</li>
+		</ul>
+
+		<img src="image.png" />
+		<span>Abbildung 1: Schematischer Aufbau von Kalita</span>
+
+		<p>
+			Diese Seite enthält einen Beispieltext, um alle Funktionen des
+			Frontends auszuprobieren. So finden sich hier neben Überschriften,
+			formatiertem Text, Links, Listen und Bildern mit Bildunterschriften
+			auch englische Begriffe im Fließtext.
 		</p>
 
 		<!-- Kalita JavaScript -->
