@@ -2,59 +2,79 @@ $player-background: #eeeeee;
 $hover-background: #e39774;
 $range-background: #a0c7cf;
 $meter-background: #326273;
+$highlight-text: #beffd6;
+$highlight-word: #a4cbff;
 
 #kalita-player {
 	max-width: 300px;
 	align-items: center;
 	display: flex;
 	background-color: $player-background;
+}
 
-	.kalita-control,
-	.kalita-slider {
-		margin: 0;
-		padding: 0.5em;
-		border: none;
-		color: inherit;
-		font: inherit;
-		text-decoration: none;
-		background-color: transparent;
+.kalita-popup {
+	position: absolute;
+	z-index: 1000;
+	background-color: $player-background;
+}
 
-		.kalita-icon {
-			width: 1.5em;
-			height: 1.5em;
-			display: block;
+.kalita-control,
+.kalita-slider {
+	margin: 0;
+	padding: 0.5em;
+	border: none;
+	color: inherit;
+	font: inherit;
+	text-decoration: none;
+	background-color: transparent;
+
+	.kalita-icon {
+		width: 1.5em;
+		height: 1.5em;
+		display: block;
+
+		&[aria-hidden="true"] {
+			display: none;
 		}
 	}
+}
 
-	.kalita-control {
-		&:hover,
-		&:focus {
-			background-color: $hover-background;
-		}
+.kalita-control {
+	&:hover,
+	&:focus {
+		background-color: $hover-background;
+	}
+}
+
+.kalita-slider {
+	height: 2.5em;
+	flex: 1;
+
+	&:focus {
+		background-color: $hover-background;
 	}
 
-	.kalita-slider {
-		height: 2.5em;
-		flex: 1;
-
-		&:focus {
-			background-color: $hover-background;
-		}
-
-		.kalita-range,
-		.kalita-meter {
-			height: 1em;
-			display: block;
-		}
-
-		.kalita-range {
-			width: 100%;
-			background-color: $range-background;
-		}
-
-		.kalita-meter {
-			width: 50%;
-			background-color: $meter-background;
-		}
+	.kalita-range,
+	.kalita-meter {
+		height: 1em;
+		display: block;
 	}
+
+	.kalita-range {
+		width: 100%;
+		background-color: $range-background;
+	}
+
+	.kalita-meter {
+		width: 50%;
+		background-color: $meter-background;
+	}
+}
+
+span.kalita-marked {
+	background-color: $highlight-text;
+}
+
+span.kalita-word {
+	background: $highlight-word;
 }

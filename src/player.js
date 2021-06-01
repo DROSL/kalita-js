@@ -1,6 +1,3 @@
-let player = document.createElement("div");
-player.id = "kalita-player";
-
 import playIcon from "./svg/play.svg";
 import pauseIcon from "./svg/pause.svg";
 import replayIcon from "./svg/replay.svg";
@@ -9,47 +6,107 @@ import stopIcon from "./svg/stop.svg";
 import downloadIcon from "./svg/download.svg";
 import settingsIcon from "./svg/settings.svg";
 
-let replayButton = document.createElement("button");
-replayButton.className = "kalita-control kalita-replay";
-replayIcon.className = "kalita-icon";
-replayButton.appendChild(replayIcon);
-player.appendChild(replayButton);
+class Player {
+	constructor() {
+		this.player = document.createElement("div");
+		this.player.id = "kalita-player";
 
-let playButton = document.createElement("button");
-playButton.className = "kalita-control kalita-play";
-playIcon.className = "kalita-icon";
-playButton.appendChild(playIcon);
-player.appendChild(playButton);
+		this.replayButton = document.createElement("button");
+		this.replayButton.className = "kalita-control kalita-replay";
+		replayIcon.className = "kalita-icon";
+		this.replayButton.appendChild(replayIcon);
+		this.player.appendChild(this.replayButton);
 
-let forwardButton = document.createElement("button");
-forwardButton.className = "kalita-control kalita-forward";
-forwardIcon.className = "kalita-icon";
-forwardButton.appendChild(forwardIcon);
-player.appendChild(forwardButton);
+		this.playButton = document.createElement("button");
+		this.playButton.className = "kalita-control kalita-play";
+		this.playButton.addEventListener("click", () => {
+			this.playpause();
+		});
+		playIcon.className = "kalita-icon";
+		this.playButton.appendChild(playIcon);
+		pauseIcon.className = "kalita-icon";
+		pauseIcon.setAttribute("aria-hidden", true);
+		this.playButton.appendChild(pauseIcon);
+		this.player.appendChild(this.playButton);
 
-let slider = document.createElement("button");
-slider.className = "kalita-slider";
-slider.setAttribute("role", "slider");
-player.appendChild(slider);
+		this.forwardButton = document.createElement("button");
+		this.forwardButton.className = "kalita-control kalita-forward";
+		forwardIcon.className = "kalita-icon";
+		this.forwardButton.appendChild(forwardIcon);
+		this.player.appendChild(this.forwardButton);
 
-let mediaRange = document.createElement("span");
-mediaRange.className = "kalita-range";
-slider.appendChild(mediaRange);
+		this.slider = document.createElement("button");
+		this.slider.className = "kalita-slider";
+		this.slider.setAttribute("role", "slider");
+		this.player.appendChild(this.slider);
 
-let mediaMeter = document.createElement("span");
-mediaMeter.className = "kalita-meter";
-mediaRange.appendChild(mediaMeter);
+		this.mediaRange = document.createElement("span");
+		this.mediaRange.className = "kalita-range";
+		this.slider.appendChild(this.mediaRange);
 
-let downloadButton = document.createElement("button");
-downloadButton.className = "kalita-control kalita-download";
-downloadIcon.className = "kalita-icon";
-downloadButton.appendChild(downloadIcon);
-player.appendChild(downloadButton);
+		this.mediaMeter = document.createElement("span");
+		this.mediaMeter.className = "kalita-meter";
+		this.mediaRange.appendChild(this.mediaMeter);
 
-let settingsButton = document.createElement("button");
-settingsButton.className = "kalita-control kalita-settings";
-settingsIcon.className = "kalita-icon";
-settingsButton.appendChild(settingsIcon);
-player.appendChild(settingsButton);
+		this.downloadButton = document.createElement("button");
+		this.downloadButton.className = "kalita-control kalita-download";
+		downloadIcon.className = "kalita-icon";
+		this.downloadButton.appendChild(downloadIcon);
+		this.player.appendChild(this.downloadButton);
 
-export default player;
+		this.settingsButton = document.createElement("button");
+		this.settingsButton.className = "kalita-control kalita-settings";
+		settingsIcon.className = "kalita-icon";
+		this.settingsButton.appendChild(settingsIcon);
+		this.player.appendChild(this.settingsButton);
+
+		this.audio = new Audio();
+		this.audio.addEventListener("canplay", (event) => {
+			this.audio.play();
+		});
+		this.audio.addEventListener("play", (event) => {
+			playIcon.setAttribute("aria-hidden", true);
+			pauseIcon.setAttribute("aria-hidden", false);
+			if (this.highlighter) {
+				this.highlighter.play(
+					this.audio.duration,
+					this.audio.currentTime
+				);
+			}
+		});
+		this.audio.addEventListener("pause", (event) => {
+			playIcon.setAttribute("aria-hidden", false);
+			pauseIcon.setAttribute("aria-hidden", true);
+			if (this.highlighter) {
+				this.highlighter.pause();
+			}
+		});
+		this.audio.addEventListener("timeupdate", (event) => {
+			this.mediaMeter.style.width =
+				Math.floor(
+					(this.audio.currentTime / this.audio.duration) * 100
+				) + "%";
+		});
+
+		this.highlighter = null;
+	}
+
+	insert(target) {
+		target.replaceWith(this.player);
+	}
+
+	start(highlighter) {
+		this.highlighter = highlighter;
+		this.audio.src = "speak.mp3";
+	}
+
+	playpause() {
+		if (this.audio.paused) {
+			this.audio.play();
+		} else {
+			this.audio.pause();
+		}
+	}
+}
+
+export default Player;
