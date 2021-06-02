@@ -20,7 +20,8 @@ class Highlighter {
 		let startOffset = this.range.startOffset;
 		while (
 			startOffset > 0 &&
-			this.range.startContainer.nodeValue.charAt(startOffset - 1) !== " "
+			this.range.startContainer.nodeValue.charAt(startOffset - 1).trim()
+				.length > 0
 		) {
 			startOffset--;
 		}
@@ -29,7 +30,8 @@ class Highlighter {
 		let endOffset = this.range.endOffset;
 		while (
 			endOffset < this.range.endContainer.length &&
-			this.range.endContainer.nodeValue.charAt(endOffset) !== " "
+			this.range.endContainer.nodeValue.charAt(endOffset).trim().length >
+				0
 		) {
 			endOffset++;
 		}
@@ -60,7 +62,7 @@ class Highlighter {
 				}
 			} else if (
 				node.nodeType === Node.TEXT_NODE &&
-				node.length > 0 &&
+				node.nodeValue.trim().length > 0 &&
 				selection.containsNode(node) &&
 				isVisible(node.parentElement)
 			) {
@@ -104,7 +106,7 @@ class Highlighter {
 
 			while (endOffset <= textNode.nodeValue.length) {
 				if (
-					textNode.nodeValue.charAt(endOffset) === " " ||
+					textNode.nodeValue.charAt(endOffset).trim().length === 0 ||
 					endOffset === textNode.nodeValue.length
 				) {
 					if (endOffset > startOffset) {
