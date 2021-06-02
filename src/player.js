@@ -13,6 +13,9 @@ class Player {
 
 		this.replayButton = document.createElement("button");
 		this.replayButton.className = "kalita-control kalita-replay";
+		this.replayButton.addEventListener("click", () => {
+			this.replay();
+		});
 		replayIcon.className = "kalita-icon";
 		this.replayButton.appendChild(replayIcon);
 		this.player.appendChild(this.replayButton);
@@ -31,6 +34,9 @@ class Player {
 
 		this.forwardButton = document.createElement("button");
 		this.forwardButton.className = "kalita-control kalita-forward";
+		this.forwardButton.addEventListener("click", () => {
+			this.forward();
+		});
 		forwardIcon.className = "kalita-icon";
 		this.forwardButton.appendChild(forwardIcon);
 		this.player.appendChild(this.forwardButton);
@@ -65,27 +71,13 @@ class Player {
 			this.audio.play();
 		});
 		this.audio.addEventListener("play", (event) => {
-			playIcon.setAttribute("aria-hidden", true);
-			pauseIcon.setAttribute("aria-hidden", false);
-			if (this.highlighter) {
-				this.highlighter.play(
-					this.audio.duration,
-					this.audio.currentTime
-				);
-			}
+			this._play();
 		});
 		this.audio.addEventListener("pause", (event) => {
-			playIcon.setAttribute("aria-hidden", false);
-			pauseIcon.setAttribute("aria-hidden", true);
-			if (this.highlighter) {
-				this.highlighter.pause();
-			}
+			this._pause();
 		});
 		this.audio.addEventListener("timeupdate", (event) => {
-			this.mediaMeter.style.width =
-				Math.floor(
-					(this.audio.currentTime / this.audio.duration) * 100
-				) + "%";
+			this._timeupdate();
 		});
 
 		this.highlighter = null;
@@ -106,6 +98,45 @@ class Player {
 		} else {
 			this.audio.pause();
 		}
+	}
+
+	replay() {
+		let newTime = this.audio.currentTime - 10;
+		this.audio.currentTime = newTime > 0 ? newTime : 0;
+		if (this.highlighter) {
+			this.highlighter.play(this.audio.duration, this.audio.currentTime);
+		}
+	}
+
+	forward() {
+		let newTime = this.audio.currentTime + 10;
+		this.audio.currentTime =
+			newTime <= this.audio.duration ? newTime : this.audio.duration;
+		if (this.highlighter) {
+			this.highlighter.play(this.audio.duration, this.audio.currentTime);
+		}
+	}
+
+	_play() {
+		playIcon.setAttribute("aria-hidden", true);
+		pauseIcon.setAttribute("aria-hidden", false);
+		if (this.highlighter) {
+			this.highlighter.play(this.audio.duration, this.audio.currentTime);
+		}
+	}
+
+	_pause() {
+		playIcon.setAttribute("aria-hidden", false);
+		pauseIcon.setAttribute("aria-hidden", true);
+		if (this.highlighter) {
+			this.highlighter.pause();
+		}
+	}
+
+	_timeupdate() {
+		this.mediaMeter.style.width =
+			Math.floor((this.audio.currentTime / this.audio.duration) * 100) +
+			"%";
 	}
 }
 
