@@ -18,8 +18,7 @@ $highlight-word: #a4cbff;
 	background-color: $player-background;
 }
 
-.kalita-control,
-.kalita-slider {
+.kalita-control {
 	margin: 0;
 	padding: 0.5em;
 	border: none;
@@ -27,6 +26,11 @@ $highlight-word: #a4cbff;
 	font: inherit;
 	text-decoration: none;
 	background-color: transparent;
+
+	&:hover,
+	&:focus {
+		background-color: $hover-background;
+	}
 
 	.kalita-icon {
 		width: 1.5em;
@@ -39,15 +43,9 @@ $highlight-word: #a4cbff;
 	}
 }
 
-.kalita-control {
-	&:hover,
-	&:focus {
-		background-color: $hover-background;
-	}
-}
-
 .kalita-slider {
-	height: 2.5em;
+	width: 100%;
+	overflow: hidden;
 	flex: 1;
 
 	&:focus {

@@ -41,18 +41,17 @@ class Player {
 		this.forwardButton.appendChild(forwardIcon);
 		this.player.appendChild(this.forwardButton);
 
-		this.slider = document.createElement("button");
+		this.slider = document.createElement("input");
 		this.slider.className = "kalita-slider";
-		this.slider.setAttribute("role", "slider");
+		this.slider.setAttribute("type", "range");
+		this.slider.setAttribute("min", "0");
+		this.slider.setAttribute("max", "100");
+		this.slider.setAttribute("step", "1");
+		this.slider.value = "0";
+		this.slider.addEventListener("input", () => {
+			this.seek();
+		});
 		this.player.appendChild(this.slider);
-
-		this.mediaRange = document.createElement("span");
-		this.mediaRange.className = "kalita-range";
-		this.slider.appendChild(this.mediaRange);
-
-		this.mediaMeter = document.createElement("span");
-		this.mediaMeter.className = "kalita-meter";
-		this.mediaRange.appendChild(this.mediaMeter);
 
 		this.downloadButton = document.createElement("button");
 		this.downloadButton.className = "kalita-control kalita-download";
@@ -117,6 +116,14 @@ class Player {
 		}
 	}
 
+	seek() {
+		let newTime = (this.slider.value * this.audio.duration) / 100;
+		this.audio.currentTime = newTime;
+		if (this.highlighter) {
+			this.highlighter.play(this.audio.duration, newTime);
+		}
+	}
+
 	_play() {
 		playIcon.setAttribute("aria-hidden", true);
 		pauseIcon.setAttribute("aria-hidden", false);
@@ -134,9 +141,8 @@ class Player {
 	}
 
 	_timeupdate() {
-		this.mediaMeter.style.width =
-			Math.floor((this.audio.currentTime / this.audio.duration) * 100) +
-			"%";
+		this.slider.value =
+			(this.audio.currentTime / this.audio.duration) * 100;
 	}
 }
 
