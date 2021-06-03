@@ -7,15 +7,20 @@ $highlight-word: #a4cbff;
 
 #kalita-player {
 	max-width: 300px;
-	align-items: center;
-	display: flex;
 	background-color: $player-background;
+	font-family: Arial, Lucida Grande, sans-serif;
+	display: flex;
+	align-items: center;
 }
 
 .kalita-popup {
 	position: absolute;
 	z-index: 1000;
 	background-color: $player-background;
+
+	&[aria-hidden="true"] {
+		display: none;
+	}
 }
 
 .kalita-control,
@@ -27,6 +32,8 @@ $highlight-word: #a4cbff;
 	font: inherit;
 	text-decoration: none;
 	background-color: transparent;
+	display: flex;
+	align-items: center;
 
 	.kalita-icon {
 		width: 1.5em;
@@ -36,6 +43,12 @@ $highlight-word: #a4cbff;
 		&[aria-hidden="true"] {
 			display: none;
 		}
+	}
+
+	.kalita-text {
+		line-height: 1em;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
 	}
 }
 
