@@ -45,26 +45,55 @@ $highlight-word: #a4cbff;
 
 .kalita-slider {
 	width: 100%;
+	height: 1em;
 	overflow: hidden;
+	-webkit-appearance: none;
+	background-color: $range-background;
 	flex: 1;
 
-	&:focus {
-		background-color: $hover-background;
-	}
+	// Chrome
 
-	.kalita-range,
-	.kalita-meter {
+	&::-webkit-slider-runnable-track {
 		height: 1em;
-		display: block;
-	}
-
-	.kalita-range {
-		width: 100%;
 		background-color: $range-background;
 	}
 
-	.kalita-meter {
-		width: 50%;
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		width: 0px;
+		height: 0px;
+		border: none;
+		box-shadow: -100px 0 0 100px $meter-background;
+	}
+
+	// Firefox
+
+	&::-moz-range-track {
+		height: 1em;
+		background-color: $range-background;
+	}
+
+	&::-moz-range-progress {
+		height: 1em;
+		background-color: $meter-background;
+	}
+
+	&::-moz-range-thumb {
+		-webkit-appearance: none;
+		width: 0px;
+		height: 0px;
+		border: none;
+	}
+
+	// IE
+
+	&::-ms-fill-upper {
+		height: 1em;
+		background-color: $range-background;
+	}
+
+	&::-ms-fill-lower {
+		height: 1em;
 		background-color: $meter-background;
 	}
 }
