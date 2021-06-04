@@ -26,6 +26,8 @@ class Popup {
 	show(duration = 5000) {
 		let selection = window.getSelection();
 		if (selection && selection.toString()) {
+			this.popup.setAttribute("aria-hidden", false);
+
 			let range = selection.getRangeAt(0);
 			let rect = range.getBoundingClientRect();
 
@@ -37,7 +39,6 @@ class Popup {
 				this.popup.clientWidth / 2;
 			let y = window.scrollY + rect.y - this.popup.clientHeight;
 
-			this.popup.setAttribute("aria-hidden", false);
 			this.popup.style.left = `${x}px`;
 			this.popup.style.top = `${y}px`;
 

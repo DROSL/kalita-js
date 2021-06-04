@@ -10,7 +10,12 @@ let target = document.getElementById("kalita-player");
 player.insert(target);
 
 document.addEventListener("mouseup", (event) => {
-	popup.show(5000);
+	let selection = window.getSelection();
+	if (selection && selection.toString()) {
+		popup.show(5000);
+	} else {
+		popup.hide();
+	}
 });
 
 popup.playButton.addEventListener("click", () => {
