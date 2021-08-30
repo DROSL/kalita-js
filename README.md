@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://image.flaticon.com/icons/png/512/2334/2334268.png" alt="Logo Kalita" width="200">
+</p>
+
 # kalita-js
 
 **Kalita** is text-to-speech software with a special focus on data minimization and user privacy. We do not collect any personal data, do not set tracking cookies and do not outsource our service to third-party cloud solutions. The speech synthesis takes place on-premises on your own server and still offers many of the conveniences of a conventional readspeaker.
@@ -7,7 +11,7 @@
 
 ## Build
 
-You can also view the source code, edit it and then build your own version. For this you will need [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/).
+Before you can embed Kalita into your website, you need to build the software. For this you will need [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/).
 
 1. Clone the repository.
 ```bash
@@ -35,7 +39,7 @@ npm run build
 
 ## Website integration
 
-Place the two files `bundle.min.js` and `style.min.css` of your `/build` folder on your web server and include them as follows:
+If the build was successful, you will find the files `bundle.min.js` and `style.min.css`  among other files in the folder `/build`. Place these two files on your web server. Afterwards you can include them in your HTML page as follows:
 
 ### CSS
 
