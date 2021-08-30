@@ -7,18 +7,24 @@ $highlight-word: #a4cbff;
 
 #kalita-player {
 	max-width: 300px;
-	align-items: center;
-	display: flex;
 	background-color: $player-background;
+	font-family: Arial, Lucida Grande, sans-serif;
+	display: flex;
+	align-items: center;
 }
 
 .kalita-popup {
 	position: absolute;
 	z-index: 1000;
 	background-color: $player-background;
+
+	&[aria-hidden="true"] {
+		display: none;
+	}
 }
 
-.kalita-control {
+.kalita-control,
+.kalita-slider {
 	margin: 0;
 	padding: 0.5em;
 	border: none;
@@ -26,11 +32,8 @@ $highlight-word: #a4cbff;
 	font: inherit;
 	text-decoration: none;
 	background-color: transparent;
-
-	&:hover,
-	&:focus {
-		background-color: $hover-background;
-	}
+	display: flex;
+	align-items: center;
 
 	.kalita-icon {
 		width: 1.5em;
@@ -41,59 +44,42 @@ $highlight-word: #a4cbff;
 			display: none;
 		}
 	}
+
+	.kalita-text {
+		line-height: 1em;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+	}
+}
+
+.kalita-control {
+	&:hover,
+	&:focus {
+		background-color: $hover-background;
+	}
 }
 
 .kalita-slider {
-	width: 100%;
-	height: 1em;
-	overflow: hidden;
-	-webkit-appearance: none;
-	background-color: $range-background;
+	height: 2.5em;
 	flex: 1;
 
-	// Chrome
+	&:focus {
+		background-color: $hover-background;
+	}
 
-	&::-webkit-slider-runnable-track {
+	.kalita-range,
+	.kalita-meter {
 		height: 1em;
+		display: block;
+	}
+
+	.kalita-range {
+		width: 100%;
 		background-color: $range-background;
 	}
 
-	&::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		width: 0px;
-		height: 0px;
-		border: none;
-		box-shadow: -100px 0 0 100px $meter-background;
-	}
-
-	// Firefox
-
-	&::-moz-range-track {
-		height: 1em;
-		background-color: $range-background;
-	}
-
-	&::-moz-range-progress {
-		height: 1em;
-		background-color: $meter-background;
-	}
-
-	&::-moz-range-thumb {
-		-webkit-appearance: none;
-		width: 0px;
-		height: 0px;
-		border: none;
-	}
-
-	// IE
-
-	&::-ms-fill-upper {
-		height: 1em;
-		background-color: $range-background;
-	}
-
-	&::-ms-fill-lower {
-		height: 1em;
+	.kalita-meter {
+		width: 50%;
 		background-color: $meter-background;
 	}
 }
