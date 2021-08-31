@@ -11,7 +11,7 @@
 
 ## Screenshots
 
-<img src="https://user-images.githubusercontent.com/50206261/131480614-550b0470-e90f-4527-8760-42319732d889.png" alt="Kalita Screenshot" height="200">
+<img src="https://user-images.githubusercontent.com/50206261/131480614-550b0470-e90f-4527-8760-42319732d889.png" alt="Kalita Screenshot" width="600">
 
 ## Build
 
