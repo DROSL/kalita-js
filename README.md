@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://image.flaticon.com/icons/png/512/2334/2334268.png" alt="Logo Kalita" width="200">
+  <img src="https://image.flaticon.com/icons/png/512/2334/2334268.png" alt="Kalita Logo" width="200">
 </p>
 
 # kalita-js
@@ -8,6 +8,10 @@
 
 - [**kalita-server**](https://github.com/azmke/kalita-server) is a server written in Python that provides the speech synthesis.
 - [**kalita-js**](https://github.com/azmke/kalita-js) is a JavaScript client for integration into a website that provides a graphical user interface.
+
+## Screenshots
+
+<img src="https://user-images.githubusercontent.com/50206261/131480614-550b0470-e90f-4527-8760-42319732d889.png" alt="Kalita Screenshot" height="200">
 
 ## Build
 
