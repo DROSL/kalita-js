@@ -95,6 +95,10 @@ class Player {
 			this.showError("An error occurred!");
 		});
 
+		this.audio.addEventListener("waiting", (event) => {
+			console.log("waiting for media");
+		});
+
 		this.highlighter = null;
 	}
 
@@ -103,10 +107,19 @@ class Player {
 	}
 
 	start(highlighter) {
+		this.hideError();
 		this.player.setAttribute("aria-hidden", false);
 		this.highlighter = highlighter;
 		// TODO: get text from highlighter and call API
 		this.audio.src = "speak.mp3";
+	}
+
+	stop() {
+		this.audio.pause();
+		this.audio.removeAttribute("src");
+		if (this.highlighter) {
+			this.highlighter.destroy();
+		}
 	}
 
 	playpause() {
