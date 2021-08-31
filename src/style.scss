@@ -4,6 +4,7 @@ $range-background: #a0c7cf;
 $meter-background: #326273;
 $highlight-text: #beffd6;
 $highlight-word: #a4cbff;
+$font-error: #ff0033;
 
 #kalita-player {
 	max-width: 300px;
@@ -12,7 +13,7 @@ $highlight-word: #a4cbff;
 	display: flex;
 	align-items: center;
 
-	&[aria-hidden="true"] {
+	&[aria-hidden="true"], *[aria-hidden="true"] {
 		display: none;
 	}
 }
@@ -43,10 +44,6 @@ $highlight-word: #a4cbff;
 		width: 1.5em;
 		height: 1.5em;
 		display: block;
-
-		&[aria-hidden="true"] {
-			display: none;
-		}
 	}
 
 	.kalita-text {
@@ -86,6 +83,13 @@ $highlight-word: #a4cbff;
 		width: 50%;
 		background-color: $meter-background;
 	}
+}
+
+.kalita-error {
+	padding: 0.5em;
+	line-height: 1.5em;
+	color: $font-error;
+	flex: 1;
 }
 
 span.kalita-marked {

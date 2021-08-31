@@ -12,6 +12,13 @@ class Player {
 		this.player.id = "kalita-player";
 		this.player.setAttribute("aria-hidden", true);
 
+		this.errorMsg = document.createElement("div");
+		this.errorMsg.className = "kalita-error";
+		this.errorMsg.setAttribute("aria-hidden", true);
+		this.errorMsgText = document.createTextNode("Error!");
+		this.errorMsg.appendChild(this.errorMsgText);
+		this.player.appendChild(this.errorMsg);
+
 		this.replayButton = document.createElement("button");
 		this.replayButton.className = "kalita-control kalita-replay";
 		this.replayButton.addEventListener("click", () => {
@@ -71,7 +78,7 @@ class Player {
 		this.player.appendChild(this.closeButton);
 
 		this.audio = new Audio();
-		this.audio.addEventListener("canplay", (event) => {
+		this.audio.addEventListener("canplaythrough", (event) => {
 			this.audio.play();
 		});
 		this.audio.addEventListener("play", (event) => {
@@ -84,6 +91,10 @@ class Player {
 			this._timeupdate();
 		});
 
+		this.audio.addEventListener("error", (event) => {
+			this.showError("An error occurred!");
+		});
+
 		this.highlighter = null;
 	}
 
@@ -94,6 +105,7 @@ class Player {
 	start(highlighter) {
 		this.player.setAttribute("aria-hidden", false);
 		this.highlighter = highlighter;
+		// TODO: get text from highlighter and call API
 		this.audio.src = "speak.mp3";
 	}
 
@@ -144,11 +156,37 @@ class Player {
 			"%";
 	}
 
+	showError(message) {
+		// stop playing
+		this.stop();
+
+		// hide buttons
+		this.replayButton.setAttribute("aria-hidden", true);
+		this.playButton.setAttribute("aria-hidden", true);
+		this.forwardButton.setAttribute("aria-hidden", true);
+		this.slider.setAttribute("aria-hidden", true);
+		this.downloadButton.setAttribute("aria-hidden", true);
+
+		// show error message
+		this.errorMsgText.nodeValue = message;
+		this.errorMsg.setAttribute("aria-hidden", false);
+	}
+
+	hideError() {
+		// show buttons
+		this.replayButton.removeAttribute("aria-hidden");
+		this.playButton.removeAttribute("aria-hidden");
+		this.forwardButton.removeAttribute("aria-hidden");
+		this.slider.removeAttribute("aria-hidden");
+		this.downloadButton.removeAttribute("aria-hidden");
+
+		// hide error message
+		this.errorMsg.setAttribute("aria-hidden", true);
+	}
+
 	close() {
-		this.audio.pause();
-		if (this.highlighter) {
-			this.highlighter.destroy();
-		}
+		this.stop();
+		this.hideError();
 		this.player.setAttribute("aria-hidden", true);
 	}
 }
