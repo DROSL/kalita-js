@@ -4,12 +4,13 @@ import replayIcon from "./svg/replay.svg";
 import forwardIcon from "./svg/forward.svg";
 import stopIcon from "./svg/stop.svg";
 import downloadIcon from "./svg/download.svg";
-import settingsIcon from "./svg/settings.svg";
+import closeIcon from "./svg/close.svg";
 
 class Player {
 	constructor() {
 		this.player = document.createElement("div");
 		this.player.id = "kalita-player";
+		this.player.setAttribute("aria-hidden", true);
 
 		this.replayButton = document.createElement("button");
 		this.replayButton.className = "kalita-control kalita-replay";
@@ -60,11 +61,14 @@ class Player {
 		this.downloadButton.appendChild(downloadIcon);
 		this.player.appendChild(this.downloadButton);
 
-		this.settingsButton = document.createElement("button");
-		this.settingsButton.className = "kalita-control kalita-settings";
-		settingsIcon.className = "kalita-icon";
-		this.settingsButton.appendChild(settingsIcon);
-		this.player.appendChild(this.settingsButton);
+		this.closeButton = document.createElement("button");
+		this.closeButton.className = "kalita-control kalita-close";
+		this.closeButton.addEventListener("click", () => {
+			this.close();
+		});
+		closeIcon.className = "kalita-icon";
+		this.closeButton.appendChild(closeIcon);
+		this.player.appendChild(this.closeButton);
 
 		this.audio = new Audio();
 		this.audio.addEventListener("canplay", (event) => {
@@ -88,6 +92,7 @@ class Player {
 	}
 
 	start(highlighter) {
+		this.player.setAttribute("aria-hidden", false);
 		this.highlighter = highlighter;
 		this.audio.src = "speak.mp3";
 	}
@@ -97,6 +102,22 @@ class Player {
 			this.audio.play();
 		} else {
 			this.audio.pause();
+		}
+	}
+
+	_play() {
+		playIcon.setAttribute("aria-hidden", true);
+		pauseIcon.setAttribute("aria-hidden", false);
+		if (this.highlighter) {
+			this.highlighter.play(this.audio.duration, this.audio.currentTime);
+		}
+	}
+
+	_pause() {
+		playIcon.setAttribute("aria-hidden", false);
+		pauseIcon.setAttribute("aria-hidden", true);
+		if (this.highlighter) {
+			this.highlighter.pause();
 		}
 	}
 
@@ -117,26 +138,18 @@ class Player {
 		}
 	}
 
-	_play() {
-		playIcon.setAttribute("aria-hidden", true);
-		pauseIcon.setAttribute("aria-hidden", false);
-		if (this.highlighter) {
-			this.highlighter.play(this.audio.duration, this.audio.currentTime);
-		}
-	}
-
-	_pause() {
-		playIcon.setAttribute("aria-hidden", false);
-		pauseIcon.setAttribute("aria-hidden", true);
-		if (this.highlighter) {
-			this.highlighter.pause();
-		}
-	}
-
 	_timeupdate() {
 		this.mediaMeter.style.width =
 			Math.floor((this.audio.currentTime / this.audio.duration) * 100) +
 			"%";
+	}
+
+	close() {
+		this.audio.pause();
+		if (this.highlighter) {
+			this.highlighter.destroy();
+		}
+		this.player.setAttribute("aria-hidden", true);
 	}
 }
 

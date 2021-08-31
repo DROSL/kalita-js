@@ -11,6 +11,10 @@ $highlight-word: #a4cbff;
 	font-family: Arial, Lucida Grande, sans-serif;
 	display: flex;
 	align-items: center;
+
+	&[aria-hidden="true"] {
+		display: none;
+	}
 }
 
 .kalita-popup {
