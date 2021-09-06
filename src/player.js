@@ -12,6 +12,7 @@ class Player {
 		this.player.id = "kalita-player";
 		this.player.setAttribute("aria-hidden", true);
 
+		// error message
 		this.errorMsg = document.createElement("div");
 		this.errorMsg.className = "kalita-error";
 		this.errorMsg.setAttribute("aria-hidden", true);
@@ -19,6 +20,7 @@ class Player {
 		this.errorMsg.appendChild(this.errorMsgText);
 		this.player.appendChild(this.errorMsg);
 
+		// replay
 		this.replayButton = document.createElement("button");
 		this.replayButton.className = "kalita-control kalita-replay";
 		this.replayButton.addEventListener("click", () => {
@@ -28,6 +30,7 @@ class Player {
 		this.replayButton.appendChild(replayIcon);
 		this.player.appendChild(this.replayButton);
 
+		// play/pause
 		this.playButton = document.createElement("button");
 		this.playButton.className = "kalita-control kalita-play";
 		this.playButton.addEventListener("click", () => {
@@ -40,6 +43,7 @@ class Player {
 		this.playButton.appendChild(pauseIcon);
 		this.player.appendChild(this.playButton);
 
+		// forward
 		this.forwardButton = document.createElement("button");
 		this.forwardButton.className = "kalita-control kalita-forward";
 		this.forwardButton.addEventListener("click", () => {
@@ -49,6 +53,7 @@ class Player {
 		this.forwardButton.appendChild(forwardIcon);
 		this.player.appendChild(this.forwardButton);
 
+		// slider
 		this.slider = document.createElement("button");
 		this.slider.className = "kalita-slider";
 		this.slider.setAttribute("role", "slider");
@@ -62,12 +67,17 @@ class Player {
 		this.mediaMeter.className = "kalita-meter";
 		this.mediaRange.appendChild(this.mediaMeter);
 
+		// download
 		this.downloadButton = document.createElement("button");
 		this.downloadButton.className = "kalita-control kalita-download";
+		this.downloadButton.addEventListener("click", () => {
+			this.download();
+		})
 		downloadIcon.className = "kalita-icon";
 		this.downloadButton.appendChild(downloadIcon);
 		this.player.appendChild(this.downloadButton);
 
+		// close
 		this.closeButton = document.createElement("button");
 		this.closeButton.className = "kalita-control kalita-close";
 		this.closeButton.addEventListener("click", () => {
@@ -77,6 +87,7 @@ class Player {
 		this.closeButton.appendChild(closeIcon);
 		this.player.appendChild(this.closeButton);
 
+		// audio events
 		this.audio = new Audio();
 		this.audio.addEventListener("canplaythrough", (event) => {
 			this.audio.play();
@@ -161,6 +172,16 @@ class Player {
 		if (this.highlighter) {
 			this.highlighter.play(this.audio.duration, this.audio.currentTime);
 		}
+	}
+
+	download() {
+		let a = document.createElement("a");
+		a.style.display = "none";
+		a.href = this.audio.src;
+		a.download = "speak.mp3";
+		document.body.append(a);
+		a.click();
+		a.remove();
 	}
 
 	_timeupdate() {
