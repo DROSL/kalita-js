@@ -1,3 +1,5 @@
+import Drag from "./drag";
+
 import playIcon from "./svg/play.svg";
 import pauseIcon from "./svg/pause.svg";
 import replayIcon from "./svg/replay.svg";
@@ -67,6 +69,13 @@ class Player {
 		this.mediaMeter.className = "kalita-meter";
 		this.mediaRange.appendChild(this.mediaMeter);
 
+		const drag = new Drag(this.slider, this.mediaRange, (percentage) => {
+			this.onDrag(percentage);
+		});
+		this.slider.addEventListener("keydown", (event) => {
+			this.timeKeyDown(event);
+		});
+
 		// download
 		this.downloadButton = document.createElement("button");
 		this.downloadButton.className = "kalita-control kalita-download";
@@ -93,13 +102,13 @@ class Player {
 			this.audio.play();
 		});
 		this.audio.addEventListener("play", (event) => {
-			this._play();
+			this.play();
 		});
 		this.audio.addEventListener("pause", (event) => {
-			this._pause();
+			this.pause();
 		});
 		this.audio.addEventListener("timeupdate", (event) => {
-			this._timeupdate();
+			this.timeupdate();
 		});
 
 		this.audio.addEventListener("error", (event) => {
@@ -141,7 +150,7 @@ class Player {
 		}
 	}
 
-	_play() {
+	play() {
 		playIcon.setAttribute("aria-hidden", true);
 		pauseIcon.setAttribute("aria-hidden", false);
 		if (this.highlighter) {
@@ -149,7 +158,7 @@ class Player {
 		}
 	}
 
-	_pause() {
+	pause() {
 		playIcon.setAttribute("aria-hidden", false);
 		pauseIcon.setAttribute("aria-hidden", true);
 		if (this.highlighter) {
@@ -157,20 +166,38 @@ class Player {
 		}
 	}
 
-	replay() {
-		let newTime = this.audio.currentTime - 10;
-		this.audio.currentTime = newTime > 0 ? newTime : 0;
+	replay(seconds = 10) {
+		const newTime = this.audio.currentTime - seconds;
+		this.audio.currentTime = Math.max(0, newTime);
 		if (this.highlighter) {
 			this.highlighter.play(this.audio.duration, this.audio.currentTime);
 		}
 	}
 
-	forward() {
-		let newTime = this.audio.currentTime + 10;
-		this.audio.currentTime =
-			newTime <= this.audio.duration ? newTime : this.audio.duration;
+	forward(seconds = 10) {
+		const newTime = this.audio.currentTime + seconds;
+		this.audio.currentTime = Math.min(this.audio.duration, newTime);
 		if (this.highlighter) {
 			this.highlighter.play(this.audio.duration, this.audio.currentTime);
+		}
+	}
+
+	onDrag(percentage) {
+		this.audio.currentTime = this.audio.duration * percentage;
+		if (this.highlighter) {
+			this.highlighter.play(this.audio.duration, this.audio.currentTime);
+		}
+	}
+
+	timeKeyDown(event) {
+		const { keyCode, shiftKey } = event;
+
+		if (keyCode == 37) {
+			event.preventDefault();
+			this.replay(shiftKey ? 10 : 1);
+		} else if (keyCode == 39) {
+			event.preventDefault();
+			this.forward(shiftKey ? 10 : 1);
 		}
 	}
 
@@ -184,7 +211,7 @@ class Player {
 		a.remove();
 	}
 
-	_timeupdate() {
+	timeupdate() {
 		this.mediaMeter.style.width =
 			Math.floor((this.audio.currentTime / this.audio.duration) * 100) +
 			"%";
