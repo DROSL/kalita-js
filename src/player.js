@@ -132,7 +132,8 @@ class Player {
 		this.player.setAttribute("aria-hidden", false);
 		this.highlighter = highlighter;
 		// TODO: get text from highlighter and call API
-		this.audio.src = config.url + encodeURIComponent(this.highlighter.text);
+		let text = this.highlighter.text.replace(/\s+/g, " ").trim();
+		this.audio.src = config.url + encodeURIComponent(text);
 	}
 
 	stop() {
