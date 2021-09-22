@@ -1,3 +1,4 @@
+import config from "./../config.json";
 import Drag from "./drag";
 
 import playIcon from "./svg/play.svg";
@@ -131,7 +132,7 @@ class Player {
 		this.player.setAttribute("aria-hidden", false);
 		this.highlighter = highlighter;
 		// TODO: get text from highlighter and call API
-		this.audio.src = "speak.mp3";
+		this.audio.src = config.url + encodeURIComponent(this.highlighter.text);
 	}
 
 	stop() {
